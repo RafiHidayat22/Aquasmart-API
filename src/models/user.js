@@ -19,15 +19,21 @@ const findUserByEmail = (email, callback) => {
 const addUser = (data, callback) => {
   const sql = 'INSERT INTO users SET ?';
   db.query(sql, data, (err, results) => {
-    if (err) return callback(err, null);
+    if (err) {
+      console.error('SQL Error:', err.message); // Log pesan error SQL
+      return callback(err, null);
+    }
 
-    // Pastikan results memiliki data ID
-    if (!results || !results.insertId) {
+    // Tambahkan validasi jika insert gagal
+    if (!results || results.affectedRows === 0) {
+      console.error('Insert Operation Failed:', results); // Log hasil jika gagal
       return callback(new Error('Failed to insert user'), null);
     }
 
-    callback(null, results); // Kembalikan hasil
+    console.log('Insert Success:', results); // Log jika berhasil
+    callback(null, results);
   });
 };
+
 
 module.exports = { findUserByEmail, addUser };

@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 const db = mysql.createConnection({
-  host: '',
-  user: '',
-  password: '',
-  database: '',
+  host: '34.101.233.242',
+  user: 'root',
+  password: '123',
+  database: 'auth_db',
 });
 
 db.connect((err) => {
