@@ -4,7 +4,7 @@ const authRoutes = require('./routes/routes.js');
 const init = async () => {
   const server = Hapi.server({
     port: 9000,
-    host: 'localhost',
+    host: '0.0.0.0',
     routes: {
       cors: {
         origin: ['*'],
