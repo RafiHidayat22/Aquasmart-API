@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const util = require('util');
 
 // Cari user berdasarkan email
 const findUserByEmail = (email, callback) => {
@@ -35,5 +36,34 @@ const addUser = (data, callback) => {
   });
 };
 
+const findUserById = (id) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM users WHERE id = ?';
+    db.query(sql, [id], (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(results[0]);
+    });
+  });
+};
 
-module.exports = { findUserByEmail, addUser };
+const updatePP = async (id, profilePictureUrl) => {
+  const sql = 'UPDATE users SET profile_picture_url = ?, updated_at = NOW() WHERE id = ?';
+  const query = util.promisify(db.query).bind(db);
+  try {
+    const result = await query(sql, [profilePictureUrl, id]);
+
+    if (result.affectedRows === 0) {
+      throw new Error('User tidak ditemukan atau gagal diperbarui.');
+    }
+
+    return result;
+  } catch (error) {
+    console.error('Error updating profile picture:', error);
+    throw error;
+  }
+};
+
+
+module.exports = { findUserByEmail, addUser, findUserById, updatePP  };
