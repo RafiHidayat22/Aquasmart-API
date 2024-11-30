@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const { nanoid } = require('nanoid');
 const User = require('../models/user.js');
 const { hashPassword, comparePassword } = require('../middlewares/hashPassword.js');
