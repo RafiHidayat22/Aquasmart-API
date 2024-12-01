@@ -3,6 +3,8 @@
 /* eslint-disable linebreak-style */
 const axios = require('axios'); // Tambahkan axios untuk permintaan HTTP
 const db = require('../db.js');
+require('dotenv').config();
+
 
 // Handler untuk menyimpan data kualitas air dan hit model ML di Cloud Run
 const addWaterQuality = async (request, h) => {
