@@ -28,21 +28,16 @@ class WaterWaveView(context: Context, attrs: AttributeSet) : View(context, attrs
     init {
         paint.isAntiAlias = true
         paint.style = Paint.Style.FILL
-
-        // Set initial shader
         paint.shader = RadialGradient(
             0f, 0f, 500f,
             intArrayOf(0xAA00A1E4.toInt(), 0xFF00A1E4.toInt(), 0xAA00A1E4.toInt()),
             null, Shader.TileMode.MIRROR
         )
-
-        // Set the background drawable
         setBackgroundResource(R.drawable.background_waterresult)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        // Adjust the shader based on new size
         paint.shader = RadialGradient(
             w / 2f, h / 2f, 500f,
             intArrayOf(0xAA00A1E4.toInt(), 0xFF00A1E4.toInt(), 0xAA00A1E4.toInt()),
@@ -55,8 +50,6 @@ class WaterWaveView(context: Context, attrs: AttributeSet) : View(context, attrs
 
         wavePath.reset()
         wavePath.moveTo(0f, height / 2f)
-
-        // Create a sinusoidal wave
         for (i in 0 until width step 10) {
             val y = (Math.sin(((i + waveOffset) * waveFrequency / width).toDouble()) * waveAmplitude).toFloat()
             wavePath.lineTo(i.toFloat(), height / 2f + y)
@@ -65,8 +58,6 @@ class WaterWaveView(context: Context, attrs: AttributeSet) : View(context, attrs
         wavePath.lineTo(width.toFloat(), height.toFloat())
         wavePath.lineTo(0f, height.toFloat())
         wavePath.close()
-
-        // Draw the wave on the canvas
         canvas.drawPath(wavePath, paint)
     }
 
@@ -76,9 +67,7 @@ class WaterWaveView(context: Context, attrs: AttributeSet) : View(context, attrs
     }
 
     fun startWaveAnimation() {
-        stopWaveAnimation() // Stop any previous animation if any
-
-        // Create a back-and-forth animation
+        stopWaveAnimation()
         waveAnimator = ValueAnimator.ofFloat(0f, width.toFloat())
         waveAnimator?.apply {
             duration = waveSpeed
@@ -105,7 +94,7 @@ class WaterWaveView(context: Context, attrs: AttributeSet) : View(context, attrs
 
     fun setWaveSpeed(speed: Long) {
         waveSpeed = speed
-        startWaveAnimation() // Restart animation with the new speed
+        startWaveAnimation()
     }
 
     fun setWaveFrequency(frequency: Float) {

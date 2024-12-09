@@ -9,7 +9,6 @@
     tools:context=".ui.auth.Register.SignUpActivity"
     android:paddingTop="50dp">
 
-    <!-- Back Button -->
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="24dp"
@@ -21,7 +20,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
-    <!-- Title -->
     <TextView
         android:id="@+id/signUpTitle"
         android:layout_width="wrap_content"
@@ -34,7 +32,6 @@
         android:textStyle="bold"
         android:fontFamily="@font/poppins_bold" />
 
-    <!-- Subtitle and Link -->
     <TextView
         android:id="@+id/subtitleSignUp"
         android:layout_width="wrap_content"
@@ -62,7 +59,6 @@
         android:textColor="@color/link"
         android:textSize="14sp" />
 
-    <!-- Full Name Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fullNameInputLayout"
         android:layout_width="297dp"
@@ -91,7 +87,6 @@
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Email -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
         android:layout_width="297dp"
@@ -120,7 +115,6 @@
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Phone Number -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phoneInputLayout"
         android:layout_width="297dp"
@@ -149,7 +143,6 @@
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Birth Date -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/birthDateInputLayout"
         android:layout_width="297dp"
@@ -179,7 +172,6 @@
             android:textColorHint="#9E9E9E" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
         android:layout_width="297dp"
@@ -207,7 +199,6 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Sign Up Button -->
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="297dp"
@@ -221,7 +212,6 @@
         android:fontFamily="@font/poppins_bold"
         android:textSize="16sp" />
 
-    <!-- ProgressBar -->
     <View
         android:id="@+id/progressOverlay"
         android:layout_width="match_parent"

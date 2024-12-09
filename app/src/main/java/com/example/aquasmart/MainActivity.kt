@@ -23,10 +23,7 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         try {
-            // Temukan NavController menggunakan ID dari NavHostFragment
             val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-            // Tentukan AppBarConfiguration untuk destinasi top-level
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.navigation_water,
@@ -36,11 +33,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_weather
                 )
             )
-
-            // Setup ActionBar untuk mendukung NavController
             setupActionBarWithNavController(navController, appBarConfiguration)
-
-            // Menghubungkan BottomNavigationView dengan NavController
             navView.setupWithNavController(navController)
 
         } catch (e: Exception) {

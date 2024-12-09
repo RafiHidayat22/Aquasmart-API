@@ -7,7 +7,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class FormValidator {
 
-    // Versi dengan semua field
     fun setupTextWatchers(
         fullNameInputLayout: TextInputLayout? = null,
         emailInputLayout: TextInputLayout? = null,
@@ -15,15 +14,11 @@ class FormValidator {
         passwordInputLayout: TextInputLayout? = null,
         birthDateInputLayout: TextInputLayout? = null
     ) {
-        // Validasi untuk Full Name (opsional)
         fullNameInputLayout?.editText?.addTextChangedListener(
             createTextWatcher(fullNameInputLayout, "Nama lengkap harus diisi")
         )
-
-        // Validasi untuk Email
         emailInputLayout?.editText?.addTextChangedListener(createEmailTextWatcher(emailInputLayout))
 
-        // Validasi untuk Nomor Telepon (opsional)
         phoneInputLayout?.editText?.addTextChangedListener(
             createPhoneNumberTextWatcher(phoneInputLayout)
         )
@@ -33,13 +28,12 @@ class FormValidator {
             createPasswordTextWatcher(passwordInputLayout)
         )
 
-        // Validasi untuk Tanggal Lahir (opsional)
+        // Validasi untuk Tanggal Lahir
         birthDateInputLayout?.editText?.addTextChangedListener(
             createTextWatcher(birthDateInputLayout, "Tanggal lahir harus diisi")
         )
     }
 
-    // TextWatcher untuk validasi teks umum
     private fun createTextWatcher(inputLayout: TextInputLayout, errorMessage: String): TextWatcher {
         return object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -48,10 +42,10 @@ class FormValidator {
                 val input = s.toString().trim()
                 if (input.isEmpty()) {
                     inputLayout.error = errorMessage
-                    inputLayout.setEndIconDrawable(null) // Hilangkan ikon error
+                    inputLayout.setEndIconDrawable(null)
                 } else {
                     inputLayout.error = null
-                    inputLayout.setEndIconDrawable(R.drawable.check) // Ikon sukses
+                    inputLayout.setEndIconDrawable(R.drawable.check)
                 }
             }
 
@@ -59,7 +53,7 @@ class FormValidator {
         }
     }
 
-    // TextWatcher untuk validasi email
+    //  validasi email
     private fun createEmailTextWatcher(inputLayout: TextInputLayout): TextWatcher {
         return object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -86,7 +80,7 @@ class FormValidator {
         }
     }
 
-    // TextWatcher untuk validasi nomor telepon
+    // validasi nomor telepon
     private fun createPhoneNumberTextWatcher(inputLayout: TextInputLayout): TextWatcher {
         return object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -113,7 +107,7 @@ class FormValidator {
         }
     }
 
-    // TextWatcher untuk validasi password
+    //  validasi password
     private fun createPasswordTextWatcher(inputLayout: TextInputLayout): TextWatcher {
         return object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

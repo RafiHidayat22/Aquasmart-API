@@ -9,9 +9,6 @@
     android:background="@drawable/background_login"
     android:paddingTop="50dp">
 
-    <!-- Logo -->
-
-    <!-- Welcome Title -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="100dp"
@@ -39,7 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.1" />
 
-    <!-- Subtitle -->
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
@@ -53,7 +49,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <!-- Email Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailInputLayout"
         android:layout_width="297dp"
@@ -83,7 +78,6 @@
             android:textColorHint="#78909C" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
         android:layout_width="297dp"
@@ -112,7 +106,6 @@
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="300dp"
@@ -126,7 +119,6 @@
         android:text="@string/log_in"
         android:textSize="16sp" />
 
-    <!-- Sign Up Link -->
 
     <TextView
         android:id="@+id/signUptext"

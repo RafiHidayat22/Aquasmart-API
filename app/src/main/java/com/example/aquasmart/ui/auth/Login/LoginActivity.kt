@@ -8,9 +8,6 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Patterns
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
@@ -46,13 +43,10 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         checkLoginStatus()
 
-
-        // Handle login button click
         binding.loginButton.setOnClickListener {
             val email = binding.emailInput.text.toString()
             val password = binding.passwordInput.text.toString()
 
-            // Validate fields before login
             if (email.isNotEmpty() && password.isNotEmpty() && binding.emailInputLayout.error == null && binding.passwordInputLayout.error == null) {
                 updateLoadingState(true)
                 loginUser(email, password)
@@ -67,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Sign up link click listener
         binding.signUpLink.setOnClickListener {
             Intent(this, SignUpActivity::class.java).apply {
                 startActivity(this)
@@ -141,7 +134,6 @@ class LoginActivity : AppCompatActivity() {
         val token = sharedPref.getString("auth_token", null)
 
         if (token != null) {
-            // Token exists, navigate directly to MainActivity
             navigateToMainActivity()
         }
     }
@@ -186,7 +178,7 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMainActivity() {
         Intent(this, MainActivity::class.java).apply {
             startActivity(this)
-            finish()  // Prevent going back to the login screen
+            finish()
         }
     }
 

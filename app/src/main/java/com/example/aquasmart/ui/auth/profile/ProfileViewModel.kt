@@ -26,7 +26,6 @@ class ProfileViewModel(application: Application, private val apiService: ApiServ
     private val _updateStatus = MutableLiveData<String>()
     val updateStatus: LiveData<String> = _updateStatus
 
-    // Fungsi untuk mengambil data profil
     fun getProfile(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -42,7 +41,6 @@ class ProfileViewModel(application: Application, private val apiService: ApiServ
         }
     }
 
-    // Fungsi untuk mengupdate foto profil
     fun updateProfilePicture(token: String, imageFile: File) {
         val requestFile = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("profilePicture", imageFile.name, requestFile)
@@ -61,14 +59,13 @@ class ProfileViewModel(application: Application, private val apiService: ApiServ
         }
     }
 
-    // Fungsi untuk mendapatkan file dari URI
     private fun getFileFromUri(uri: Uri): File? {
         val cursor = getApplication<Application>().contentResolver.query(uri, null, null, null, null)
         cursor?.let {
             if (it.moveToFirst()) {
                 val columnIndex = it.getColumnIndex("_data")
                 val filePath = it.getString(columnIndex)
-                return File(filePath)  // Mengembalikan file dari path
+                return File(filePath)
             }
         }
         return null

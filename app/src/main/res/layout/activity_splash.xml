@@ -8,7 +8,6 @@
     android:background="@drawable/background_splash"
     tools:context=".ui.Splash.SplashActivity">
 
-    <!-- Logo Image -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="300dp"
@@ -62,7 +61,6 @@
         app:layout_constraintVertical_bias="0.711"
         app:srcCompat="@drawable/shape" />
 
-    <!-- Bottom Decorative Image -->
     <ImageView
         android:id="@+id/ivBottom"
         android:layout_width="150dp"

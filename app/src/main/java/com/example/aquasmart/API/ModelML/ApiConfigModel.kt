@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfigModel {
-    private const val BASE_URL = "http://34.101.36.110:9000/" // Base URL untuk model ML
+    private const val BASE_URL = "http://34.101.36.110:9000/"
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {

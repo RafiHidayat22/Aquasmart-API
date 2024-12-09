@@ -18,10 +18,7 @@ class WaterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWaterBinding.inflate(inflater, container, false)
-
-        // Set listener untuk tombol pindah fragment
         binding.btnInput.setOnClickListener {
-            // Navigasi ke AnotherFragment menggunakan Navigation Component
             findNavController().navigate(R.id.action_navigation_water_to_waterResultFragment)
         }
         binding.fabProfile.setOnClickListener{

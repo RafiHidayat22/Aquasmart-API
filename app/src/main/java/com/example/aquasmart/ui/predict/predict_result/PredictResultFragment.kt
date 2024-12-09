@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.aquasmart.R
-import com.example.aquasmart.databinding.FragmentPredictBinding
 import com.example.aquasmart.databinding.FragmentPredictResultBinding
 
 class PredictResultFragment : Fragment() {
@@ -27,15 +24,13 @@ class PredictResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Initialize bubble animator
         bubbleAnimator = BubbleAnimator(requireContext(), binding.bubbleContainer)
         bubbleAnimator.startAnimating()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        bubbleAnimator.stopAnimating() // Stop animation to avoid memory leaks
+        bubbleAnimator.stopAnimating()
         _binding = null
     }
 

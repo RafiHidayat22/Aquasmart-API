@@ -42,7 +42,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Nama Pengguna -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameProfileLayout"
         android:layout_width="297dp"
@@ -68,11 +67,10 @@
             android:layout_width="match_parent"
             android:fontFamily="@font/poppins_reguler"
             android:layout_height="wrap_content"
-            android:enabled="false" /> <!-- Disable editing -->
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Email Pengguna -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailProfileLayout"
         android:layout_width="297dp"
@@ -97,11 +95,10 @@
             android:fontFamily="@font/poppins_reguler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false" /> <!-- Disable editing -->
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Nomor Telepon Pengguna -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phoneProfileLayout"
         android:layout_width="297dp"
@@ -126,11 +123,10 @@
             android:fontFamily="@font/poppins_reguler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false" /> <!-- Disable editing -->
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Tanggal Lahir Pengguna -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/birthdateProfileLayout"
         android:layout_width="297dp"
@@ -155,7 +151,7 @@
             android:fontFamily="@font/poppins_reguler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false" /> <!-- Disable editing -->
+            android:enabled="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

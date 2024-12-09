@@ -9,8 +9,6 @@ import java.io.InputStream
 fun uriToFile(uri: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver
     val fileName = getFileName(uri, context)
-
-    // Dapatkan InputStream dari Uri
     val inputStream: InputStream? = contentResolver.openInputStream(uri)
     val file = File(context.cacheDir, fileName)
 
@@ -23,7 +21,6 @@ fun uriToFile(uri: Uri, context: Context): File {
     return file
 }
 
-// Mendapatkan nama file dari Uri
 fun getFileName(uri: Uri, context: Context): String {
     val cursor = context.contentResolver.query(uri, null, null, null, null)
     cursor?.use {
