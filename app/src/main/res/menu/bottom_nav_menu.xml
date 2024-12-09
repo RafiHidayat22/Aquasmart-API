@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_water"
+        android:icon="@drawable/iconswater50"
+        android:title="@string/title_monitor" />
+
+    <item
+        android:id="@+id/navigation_predict"
+        android:icon="@drawable/predict"
+        android:title="@string/title_predict" />
+
+    <item
+        android:id="@+id/navigation_guide"
+        android:icon="@drawable/guide"
+        android:title="@string/title_guide" />
+    <item
+        android:id="@+id/navigation_weather"
+        android:icon="@drawable/weather"
+        android:title="@string/weather"/>
+    <item
+        android:id="@+id/navigation_report"
+        android:icon="@drawable/report"
+        android:title="@string/report"/>
+
+</menu>

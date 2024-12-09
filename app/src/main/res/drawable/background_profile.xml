@@ -1,0 +1,37 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Gradient Background -->
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#001F3F"
+            android:endColor="#3A6D8C"
+            android:angle="135"
+            android:type="linear"
+            android:centerColor="#0A2C46"
+            android:useLevel="false" />
+        </shape>
+    </item>
+
+    <!-- Soft inner glow effect -->
+    <item>
+        <shape>
+            <solid android:color="#80FFFFFF" /> <!-- Semi-transparent white -->
+            <size android:width="200dp" android:height="200dp" />
+            <corners android:radius="100dp" />
+        </shape>
+        <gravity android:layout_gravity="center" />
+    </item>
+
+    <!-- Additional gradient shapes (gradient overlap effect) -->
+    <item>
+        <shape>
+            <gradient
+                android:startColor="#3A6D8C"
+                android:endColor="#001F3F"
+                android:angle="45" />
+        </shape>
+        <gravity android:layout_gravity="center|end" />
+    </item>
+
+</layer-list>

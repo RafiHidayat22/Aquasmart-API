@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_signup"
+    tools:context=".ui.auth.Register.SignUpActivity"
+    android:paddingTop="50dp">
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:contentDescription="@string/back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/signUpTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:text="@string/signup"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins_bold" />
+
+    <!-- Subtitle and Link -->
+    <TextView
+        android:id="@+id/subtitleSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signUpButton"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="13dp"
+        android:fontFamily="@font/poppins_italic"
+        android:text="@string/already_have_an_account"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txtLinkLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signUpButton"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@id/subtitleSignUp"
+        android:fontFamily="@font/poppins_italic"
+        android:text="@string/alereadylogin"
+        android:textColor="@color/link"
+        android:textSize="14sp" />
+
+    <!-- Full Name Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fullNameInputLayout"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signUpTitle"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/baseline_person_pin_24"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#E0F7FA"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fullNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:hint="@string/fullname"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_reguler"
+            android:textColorHint="#9E9E9E"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fullNameInputLayout"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/baseline_email_24"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#E0F7FA"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="@font/poppins_reguler"
+            android:textColorHint="#9E9E9E"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Phone Number -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneInputLayout"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailInputLayout"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/baseline_phone_enabled_24"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#E0F7FA"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phone_number"
+            android:fontFamily="@font/poppins_reguler"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            android:textColorHint="#9E9E9E"
+            android:inputType="phone" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Birth Date -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/birthDateInputLayout"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phoneInputLayout"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/baseline_date_range_24"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#E0F7FA"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birthDateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/birth_date"
+            android:fontFamily="@font/poppins_reguler"
+            android:textSize="15sp"
+            android:focusable="false"
+            android:clickable="true"
+            android:textColor="@android:color/black"
+            android:textColorHint="#9E9E9E" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        android:layout_width="297dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/birthDateInputLayout"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        app:endIconMode="password_toggle"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#E0F7FA"
+        app:boxCornerRadiusTopStart="12dp"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusBottomStart="12dp"
+        app:boxCornerRadiusBottomEnd="12dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/set_password"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_reguler"
+            android:textColorHint="#9E9E9E"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="297dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/passwordInputLayout"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundedbtn"
+        android:text="@string/signup"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="16sp" />
+
+    <!-- ProgressBar -->
+    <View
+        android:id="@+id/progressOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B83A6D8C"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:indeterminateTint="@color/white"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        tools:ignore="MissingConstraints" />
+
+</RelativeLayout>

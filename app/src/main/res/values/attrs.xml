@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Definisikan atribut kustom untuk CustomTextInputLayout -->
+    <declare-styleable name="CustomTextInputLayout">
+        <!-- Atribut untuk boxBackgroundColor -->
+        <attr name="boxBackgroundColor" format="color" />
+        <!-- Atribut lainnya yang ingin Anda tambahkan -->
+        <attr name="boxCornerRadiusTopStart" format="dimension" />
+        <attr name="boxCornerRadiusTopEnd" format="dimension" />
+        <attr name="boxCornerRadiusBottomStart" format="dimension" />
+        <attr name="boxCornerRadiusBottomEnd" format="dimension" />
+    </declare-styleable>
+</resources>
