@@ -1,8 +1,10 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable quotes */
+/* eslint-disable linebreak-style */
 /* eslint-disable camelcase */
 /* eslint-disable linebreak-style */
 const axios = require('axios'); // Tambahkan axios untuk permintaan HTTP
-const db = require('../db.js');
+const db = require('../config/db.js');
 require('dotenv').config();
 
 
@@ -16,22 +18,28 @@ const addWaterQuality = async (request, h) => {
 
   try {
     // Hit model ML di Cloud Run
-    const cloudRunUrl = process.env.CLOUD_RUN_MODEL_URL; // URL Cloud Run dari .env
+    const cloudRunUrl = process.env.CLOUD_RUN_MODEL_URL;
     const mlResponse = await axios.post(`${cloudRunUrl}/predict`, {
       ph,
       turbidity,
       temperature,
     });
 
-    const prediction = mlResponse.data.prediction; // Ambil hasil prediksi dari ML
-    // Simpan data kualitas air ke tabel `water_quality_input`
-    const [waterResult] = await db.query(
-      'INSERT INTO water_quality_input (ph, turbidity, temprature) VALUES (?, ?, ?)',
+    const prediction = mlResponse.data.result; // Ambil hasil prediksi dari ML
+
+    if (!prediction) {
+      return h.response({ message: 'Prediksi tidak berhasil' }).code(500);
+    }
+
+    // Simpan data kualitas air ke tabel `water_quality_input` setelah prediksi berhasil
+    const result = await db.query(
+      'INSERT INTO water_quality_input (ph, turbidity, temperature) VALUES (?, ?, ?)',
       [ph, turbidity, temperature]
     );
 
-    // Simpan hasil prediksi ke tabel `water_quality_output` dengan foreign key `water_quality_id`
-    const waterQualityId = waterResult.insertId; // ID dari tabel `water_quality_input`
+    const waterQualityId = result.insertId; // Dapatkan ID dari data yang dimasukkan
+
+    // Simpan hasil prediksi ke tabel `water_quality_output`
     await db.query(
       'INSERT INTO water_quality_output (water_quality_id, prediction) VALUES (?, ?)',
       [waterQualityId, prediction]
@@ -42,18 +50,14 @@ const addWaterQuality = async (request, h) => {
       water_quality_id: waterQualityId,
       prediction,
     }).code(201);
-
   } catch (error) {
     console.error(error);
-
-    // Tangani error dari Cloud Run atau database
     if (error.response) {
       return h.response({
         message: 'Error saat memproses prediksi ML',
         error: error.response.data,
       }).code(500);
     }
-
     return h.response({
       message: 'Database error atau masalah koneksi!',
       error: error.message,
@@ -61,31 +65,35 @@ const addWaterQuality = async (request, h) => {
   }
 };
 
+
 const getPredictions = async (request, h) => {
   try {
-    const [rows] = await db.query(`
+    // Query untuk mengambil semua data dari kedua tabel menggunakan JOIN
+    const rows = await db.query(`
       SELECT 
         r.id AS prediction_id,
         r.water_quality_id,
         r.prediction,
         w.ph,
         w.turbidity,
-        w.temprature,
+        w.temperature,
         w.created_at
       FROM water_quality_output r
       JOIN water_quality_input w ON r.water_quality_id = w.id
     `);
 
+    // Mengembalikan seluruh data
     return h.response(rows).code(200);
   } catch (error) {
-    console.error(error);
+    console.error('Database error:', error.message);
     return h.response({ message: 'Database error!', error: error.message }).code(500);
   }
 };
 
-const getPredictionById = async (request, h) => {
-  const { id } = request.params; // ID dari URL parameter
 
+const getPredictionById = async (request, h) => {
+  const { prediction_id } = request.params; // Ambil prediction_id dari parameter URL
+  console.log("Received ID:", prediction_id);  // Log ID untuk memverifikasi
   try {
     const [rows] = await db.query(`
       SELECT 
@@ -94,19 +102,20 @@ const getPredictionById = async (request, h) => {
         r.prediction,
         w.ph,
         w.turbidity,
-        w.temprature,
+        w.temperature,
         w.created_at
       FROM water_quality_output r
       JOIN water_quality_input w ON r.water_quality_id = w.id
-      WHERE r.id = ?`, [id]);
+      WHERE r.id = ?`, [prediction_id]);  // Menggunakan prediction_id untuk query
 
-    if (rows.length === 0) {
+    console.log('Rows:', rows); // Log hasil query
+    if (!rows || rows.length === 0) {
       return h.response({ message: 'Prediksi tidak ditemukan!' }).code(404);
     }
 
-    return h.response(rows[0]).code(200); // Mengembalikan hasil prediksi berdasarkan ID
+    return h.response(rows).code(200); // Mengembalikan hasil prediksi berdasarkan prediction_id
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error); // Log error
     return h.response({ message: 'Database error!', error: error.message }).code(500);
   }
 };
@@ -114,13 +123,17 @@ const getPredictionById = async (request, h) => {
 // Handler untuk mendapatkan data kualitas air
 const getWaterQuality = async (request, h) => {
   try {
-    const [rows] = await db.query('SELECT * FROM water_quality_input');
+    // Ambil semua data dari tabel `water_quality_input`
+    const rows = await db.query('SELECT * FROM water_quality_input');
+
+    // Kembalikan data dalam response
     return h.response(rows).code(200);
   } catch (error) {
-    console.error(error);
+    console.error('Database error:', error.message);
     return h.response({ message: 'Database error!', error: error.message }).code(500);
   }
 };
+
 
 // Handler untuk memperbarui data kualitas air dan hit model ML di Cloud Run
 const updateWaterQuality = async (request, h) => {

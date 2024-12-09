@@ -10,7 +10,7 @@ const {
     deleteWaterQuality,
     getPredictionById
   
-  } = require('../handlers/waterQualityHandler');
+  } = require('../handler/waterQualityHandler.js');
   
   const waterQualityRoutes = [
     {
@@ -30,7 +30,7 @@ const {
     },
     {
       method: 'GET',
-      path: '/api/water-quality/predictions/{id}', // Route untuk mendapatkan prediksi berdasarkan ID
+      path: '/api/water-quality/predictions/{prediction_id}', // Route untuk mendapatkan prediksi berdasarkan ID
       handler: getPredictionById,
     },
     {

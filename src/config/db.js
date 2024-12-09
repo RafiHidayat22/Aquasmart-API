@@ -1,4 +1,6 @@
+/* eslint-disable linebreak-style */
 const mysql = require('mysql');
+const util = require('util');
 
 const db = mysql.createConnection({
   host: '34.101.233.242',
@@ -14,5 +16,5 @@ db.connect((err) => {
   }
   console.log('Connected to MySQL database.');
 });
-
+db.query = util.promisify(db.query);
 module.exports = db;
