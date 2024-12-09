@@ -10,7 +10,7 @@ const {
     deleteWaterQuality,
     getPredictionById
   
-  } = require('../handlers/waterQualityHandler');
+  } = require('../handler/waterQualityHandler');
   
   const waterQualityRoutes = [
     {
