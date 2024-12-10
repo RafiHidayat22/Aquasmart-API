@@ -7,7 +7,6 @@ const {
     addWaterQuality, 
     getWaterQuality, 
     getPredictions,  
-    updateWaterQuality, 
     deleteWaterQuality,
   
   } = require('../handler/waterQualityHandler');
@@ -33,14 +32,6 @@ const {
       method: 'GET',
       path: '/api/water-quality/predictions',
       handler: getPredictions,
-      options: {
-        pre: [{ method: verifyToken }]
-      },
-    },
-    {
-      method: 'PUT',
-      path: '/api/water-quality/{id}',  // Route untuk mengupdate data kualitas air berdasarkan ID
-      handler: updateWaterQuality,
       options: {
         pre: [{ method: verifyToken }]
       },

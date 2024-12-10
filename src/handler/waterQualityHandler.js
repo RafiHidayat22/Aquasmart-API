@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 
 /* eslint-disable quotes */
 
@@ -30,7 +31,8 @@ const addWaterQuality = async (request, h) => {
       temperature,
     });
 
-    const prediction = mlResponse.data.result; // Ambil hasil prediksi dari ML
+    const prediction =  mlResponse.data.result; // Ambil hasil prediksi dari ML
+    const recommendation = mlResponse.data.recommendation;
 
     if (!prediction) {
       return h.response({ message: 'Prediksi tidak berhasil' }).code(500);
@@ -46,14 +48,15 @@ const addWaterQuality = async (request, h) => {
 
     // Simpan hasil prediksi ke tabel `water_quality_output`
     await db.query(
-      'INSERT INTO water_quality_output (water_quality_id, prediction, user_id) VALUES (?, ?, ?)',
-      [waterQualityId, prediction, userId]
+      'INSERT INTO water_quality_output (water_quality_id, prediction,recommendation, user_id) VALUES (?, ?, ?, ?)',
+      [waterQualityId, prediction, recommendation, userId]
     );
 
     return h.response({
       message: 'Data berhasil ditambahkan!',
       water_quality_id: waterQualityId,
       prediction,
+      recommendation
     }).code(201);
   } catch (error) {
     console.error(error);
@@ -86,6 +89,7 @@ const getPredictions = async (request, h) => {
         r.id AS prediction_id,
         r.water_quality_id,
         r.prediction,
+        r.recommendation,
         w.ph,
         w.turbidity,
         w.temperature,
@@ -130,88 +134,6 @@ const getWaterQuality = async (request, h) => {
   }
 };
 
-
-
-// Handler untuk memperbarui data kualitas air dan hit model ML di Cloud Run
-const updateWaterQuality = async (request, h) => {
-  const decoded = verifyToken(request, h); // Verifikasi token dan ambil userId dari JWT
-  if (decoded.isBoom) return decoded; // Jika token invalid, kembalikan respons error
-
-  const userId = decoded.id; // Ambil userId dari decoded token
-  const { id } = request.params; // ID dari URL parameter
-  const { ph, turbidity, temperature } = request.payload;
-
-  if (!ph || !turbidity || !temperature) {
-    return h.response({ message: 'Semua field input harus diisi' }).code(400);
-  }
-
-  try {
-    // Periksa apakah data yang akan diperbarui milik pengguna yang terautentikasi
-    const result = await db.query(
-      'SELECT * FROM water_quality_input WHERE id = ? AND user_id = ?',
-      [id, userId]
-    );
-
-    if (!result || result.length === 0) {
-      return h.response({ message: 'Data tidak ditemukan atau tidak milik Anda!' }).code(404);
-    }
-
-    // Update data kualitas air di tabel `water_quality_input`
-    const updateResult = await db.query(
-      'UPDATE water_quality_input SET ph = ?, turbidity = ?, temperature = ? WHERE id = ?',
-      [ph, turbidity, temperature, id]
-    );
-
-    if (updateResult.affectedRows === 0) {
-      return h.response({ message: 'Data tidak ditemukan!' }).code(404);
-    }
-
-    // Hit model ML di Cloud Run dengan data yang diperbarui
-    const cloudRunUrl = process.env.CLOUD_RUN_MODEL_URL; // URL Cloud Run dari .env
-    const mlResponse = await axios.post(`${cloudRunUrl}/predict`, {
-      ph,
-      turbidity,
-      temperature,
-    });
-
-    const prediction = mlResponse.data.prediction; // Ambil hasil prediksi dari ML
-
-    // Cek apakah prediction valid (tidak null)
-    if (prediction === null || prediction === undefined) {
-      return h.response({
-        message: 'Prediksi tidak tersedia!',
-        error: 'Prediksi ML mengembalikan nilai null',
-      }).code(500);
-    }
-
-    // Simpan hasil prediksi ke tabel `water_quality_output` dengan foreign key `water_quality_id`
-    await db.query(
-      'INSERT INTO water_quality_output (water_quality_id, prediction, user_id) VALUES (?, ?, ?)',
-      [id, prediction, userId]
-    );
-
-    return h.response({ message: 'Data berhasil diperbarui!', prediction }).code(200);
-  } catch (error) {
-    console.error(error);
-
-    // Tangani error dari Cloud Run atau database
-    if (error.response) {
-      return h.response({
-        message: 'Error saat memproses prediksi ML',
-        error: error.response.data,
-      }).code(500);
-    }
-
-    return h.response({
-      message: 'Database error atau masalah koneksi!',
-      error: error.message,
-    }).code(500);
-  }
-};
-
-
-
-
 // Handler untuk menghapus data kualitas air
 const deleteWaterQuality = async (request, h) => {
   const decoded = verifyToken(request, h); // Verifikasi token dan ambil userId dari JWT
@@ -222,17 +144,20 @@ const deleteWaterQuality = async (request, h) => {
 
   try {
     // Periksa apakah data yang akan dihapus milik pengguna yang terautentikasi
-    const [waterQualityData] = await db.query(
+    const result = await db.query(
       'SELECT * FROM water_quality_input WHERE id = ? AND user_id = ?',
       [id, userId]
     );
+
+    // Mengambil hasil query dari properti 'rows'
+    const waterQualityData = result[0]; // Hasil query berada di result[0]
 
     if (!waterQualityData) {
       return h.response({ message: 'Data tidak ditemukan atau tidak milik Anda!' }).code(404);
     }
 
     // Hapus data kualitas air dan hasil prediksi terkait di tabel `water_quality_output`
-    const [deleteResult] = await db.query('DELETE FROM water_quality_input WHERE id = ?', [id]);
+    const deleteResult = await db.query('DELETE FROM water_quality_input WHERE id = ?', [id]);
 
     if (deleteResult.affectedRows === 0) {
       return h.response({ message: 'Data tidak ditemukan!' }).code(404);
@@ -249,4 +174,4 @@ const deleteWaterQuality = async (request, h) => {
 };
 
 
-module.exports = { addWaterQuality, getWaterQuality, getPredictions, updateWaterQuality, deleteWaterQuality };
+module.exports = { addWaterQuality, getWaterQuality, getPredictions, deleteWaterQuality };
