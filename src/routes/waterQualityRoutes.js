@@ -2,13 +2,13 @@
 /* eslint-disable indent */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-trailing-spaces */
+const { verifyToken } = require('../middlewares/verifyToken');
 const { 
     addWaterQuality, 
     getWaterQuality, 
     getPredictions,  
     updateWaterQuality, 
     deleteWaterQuality,
-    getPredictionById
   
   } = require('../handler/waterQualityHandler');
   
@@ -17,31 +17,41 @@ const {
       method: 'POST',
       path: '/api/water-quality',
       handler: addWaterQuality,
+      options: {
+        pre: [{ method: verifyToken }]
+      },
     },
     {
       method: 'GET',
       path: '/api/water-quality',
       handler: getWaterQuality,
+      options: {
+        pre: [{ method: verifyToken }]
+      },
     },
     {
       method: 'GET',
       path: '/api/water-quality/predictions',
       handler: getPredictions,
-    },
-    {
-      method: 'GET',
-      path: '/api/water-quality/predictions/{id}', // Route untuk mendapatkan prediksi berdasarkan ID
-      handler: getPredictionById,
+      options: {
+        pre: [{ method: verifyToken }]
+      },
     },
     {
       method: 'PUT',
       path: '/api/water-quality/{id}',  // Route untuk mengupdate data kualitas air berdasarkan ID
       handler: updateWaterQuality,
+      options: {
+        pre: [{ method: verifyToken }]
+      },
     },
     {
       method: 'DELETE',
       path: '/api/water-quality/{id}',  // Route untuk menghapus data kualitas air berdasarkan ID
       handler: deleteWaterQuality,
+      options: {
+        pre: [{ method: verifyToken }]
+      },
     },
   ];
   

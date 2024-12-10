@@ -3,7 +3,8 @@ CREATE TABLE water_quality_input (
     ph FLOAT NOT NULL,
     turbidity FLOAT NOT NULL,
     temprature FLOAT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE water_quality_output (
