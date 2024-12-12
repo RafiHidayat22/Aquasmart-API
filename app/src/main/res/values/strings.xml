@@ -59,4 +59,7 @@
     <string name="jenisikan">Fish Type</string>
     <string name="jumlahpakan">Total Feeds (kg)</string>
     <string name="predictresult">"Prediction Result "</string>
+    <string name="AquaculturePerformanceReport">Aquaculture Performance Report</string>
+    <string name="please_input_your_performance">Input your Performance Report</string>
+    <string name="dataCollection">Data Collection</string>
 </resources>

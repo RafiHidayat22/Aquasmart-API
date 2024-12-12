@@ -1,23 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.report.ReportFragment">
 
-    <TextView
-        android:id="@+id/text_report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_input2"
+        android:layout_width="350dp"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="32dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/dataCollection"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dongker"
+        app:cornerRadius="20dp"
+        app:rippleColor="@color/purple_200"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="270dp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvtitle"
+        android:layout_width="411dp"
+        android:layout_height="111dp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="@string/AquaculturePerformanceReport"
+        android:textColor="@color/black"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="78dp" />
+
+    <TextView
+        android:id="@+id/tvsubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_reguler"
+        android:gravity="center"
+        android:text="@string/please_input_your_performance"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="193dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_input"
+        android:layout_width="350dp"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="32dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/input"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dongker"
+        app:cornerRadius="20dp"
+        app:rippleColor="@color/purple_200"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="484dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_input3"
+        android:layout_width="350dp"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="32dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/input"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/dongker"
+        app:cornerRadius="20dp"
+        app:rippleColor="@color/purple_200"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="378dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

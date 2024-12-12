@@ -121,22 +121,6 @@
         app:layout_constraintVertical_bias="0.177"
         app:rippleColor="@color/purple_200" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:contentDescription="@string/go_to_profile"
-        android:src="@drawable/profile"
-        app:tint="@null"
-        app:backgroundTint="@color/dongker"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_input"
-        app:layout_constraintVertical_bias="0.782"
-        app:rippleColor="@color/white" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

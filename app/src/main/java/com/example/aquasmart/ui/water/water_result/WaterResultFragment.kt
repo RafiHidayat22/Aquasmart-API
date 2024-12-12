@@ -8,19 +8,37 @@ import android.view.ViewGroup
 import com.example.aquasmart.R
 import com.example.aquasmart.databinding.FragmentWaterResultBinding
 
+@Suppress("DEPRECATION")
 class WaterResultFragment : Fragment() {
 
     private lateinit var binding: FragmentWaterResultBinding
-    private lateinit var waterWaveView: WaterWaveView
+    private lateinit var animationResult: AnimationResult
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentWaterResultBinding.inflate(inflater, container, false)
-        waterWaveView = binding.root.findViewById(R.id.waterWaveView)
-        waterWaveView.post {
-            waterWaveView.startWaveAnimation()
+
+        // Ambil prediction dan recommendation dari arguments
+        val prediction = arguments?.getString("prediction")
+        val recommendation = arguments?.getString("recommendation")
+
+        // Set prediction ke tvCondition
+        binding.tvCondition.text = prediction
+        binding.tvRecomendation.text = recommendation
+
+        // Animasi
+        animationResult = binding.root.findViewById(R.id.waterWaveView)
+        animationResult.post {
+            animationResult.startWaveAnimation()
+        }
+
+        when (prediction) {
+            "Baik" -> binding.tvCondition.setTextColor(resources.getColor(R.color.green))
+            "Sedang" -> binding.tvCondition.setTextColor(resources.getColor(R.color.yellow))
+            "Buruk" -> binding.tvCondition.setTextColor(resources.getColor(R.color.red))
+            else -> binding.tvCondition.setTextColor(resources.getColor(R.color.gray))
         }
 
         return binding.root

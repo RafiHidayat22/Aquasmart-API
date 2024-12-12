@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.aquasmart.MainActivity
 import com.example.aquasmart.databinding.ActivitySplashBinding
+import com.example.aquasmart.ui.auth.Login.LoginActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -29,8 +30,11 @@ class SplashActivity : AppCompatActivity() {
             val sharedPref = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val token = sharedPref.getString("TOKEN_KEY", null)
 
-            val nextActivity = MainActivity::class.java
-
+            val nextActivity = if (token != null) {
+                MainActivity::class.java
+            } else {
+                LoginActivity::class.java
+            }
             startActivity(Intent(this, nextActivity))
             finish()
         }, 3000)

@@ -7,13 +7,12 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RadialGradient
 import android.graphics.Shader
-import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
 import com.example.aquasmart.R
 
-class WaterWaveView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+class AnimationResult(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val paint = Paint()
     private val wavePath = Path()

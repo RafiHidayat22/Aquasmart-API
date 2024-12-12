@@ -1,5 +1,6 @@
 package com.example.aquasmart.API
 
+//auth
 data class LoginResponse(
     val status: String,
     val message: String,
@@ -28,19 +29,53 @@ data class ProfileData(
     val email: String,
     val phoneNumber: String,
     val dateBirth: String,
-    val profilePicture: String // URL gambar profil
+    val profilePicture: String
 )
+//res pp
 
 data class UpdateProfilePictureResponse(
     val status: String,
     val message: String,
-    val data: ProfilePictureData? // Menggunakan ProfilePictureData untuk gambar profil yang baru
+    val data: ProfilePictureData?
 )
 
 data class ProfilePictureData(
-    val profilePicture: String // URL gambar profil yang baru
+    val profilePicture: String
 )
 
+//res fit 1
 data class ModelPredictWaterResponse(
-    val result: String
+    val message: String,
+    val error: ErrorDetail?,
+    val prediction: String,
+    val recommendation: String
 )
+
+data class ErrorDetail(
+    val error: String
+)
+data class WaterData(
+    val ph: Float,
+    val turbidity: Float,
+    val temperature: Float
+)
+
+//res fit 2
+
+data class PredictionRequest(
+    val fish_size: Float,
+    val water_condition: String,
+    val fish_type: String,
+    val feed_amount: Float
+)
+
+data class PredictionResponse(
+    val message: String,
+    val data: PredictionData
+)
+
+data class PredictionData(
+    val predicted_days_to_harvest: String,
+    val recommended_feed: String
+)
+

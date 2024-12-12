@@ -29,9 +29,8 @@ class ReportFragment : Fragment() {
         _binding = FragmentReportBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textReport
+
         reportViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
         }
         return root
     }

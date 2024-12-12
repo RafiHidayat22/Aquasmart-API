@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.water.water_result.WaterResultFragment">
 
-    <com.example.aquasmart.ui.water.water_result.WaterWaveView
+    <com.example.aquasmart.ui.water.water_result.AnimationResult
         android:id="@+id/waterWaveView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.578" />
+        app:layout_constraintVertical_bias="0.414" />
 
     <TextView
         android:id="@+id/tv_condition"
@@ -65,11 +65,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:layout_marginBottom="68dp"
         android:fontFamily="@font/poppins_reguler"
         android:text="Harus ditambahkan PH"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -1,6 +1,7 @@
 package com.example.aquasmart.API
 
 import okhttp3.MultipartBody
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -37,7 +38,22 @@ interface ApiService {
     @Multipart
     @PUT("profile/picture")
     suspend fun updateProfilePicture(
-        @Header("Authorization") token: String, // Menyertakan token autentikasi
-        @Part profilePicture: MultipartBody.Part // Mengirim file gambar sebagai part dari form-data
+        @Header("Authorization") token: String,
+        @Part profilePicture: MultipartBody.Part
     ): UpdateProfilePictureResponse
+
+
+    //waterPredict fit 1
+    @POST("api/water-quality")
+    suspend fun waterPredict(
+        @Header("Authorization") token: String,
+        @Body waterData: WaterData
+    ): ModelPredictWaterResponse
+
+    //predict 2
+    @POST("prediksiPanen")
+    suspend fun prediksiPanen(
+        @Header("Authorization") token: String,
+        @Body PredictionRequest: PredictionRequest
+    ): PredictionResponse
 }

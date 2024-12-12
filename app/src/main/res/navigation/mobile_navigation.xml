@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_navigation_water_to_waterResultFragment"
             app:destination="@id/waterResultFragment" />
-        <action
-            android:id="@+id/action_navigation_water_to_profileActivity"
-            app:destination="@id/profileActivity" />
     </fragment>
 
     <fragment
@@ -23,9 +20,6 @@
         android:name="com.example.aquasmart.ui.predict.PredictFragment"
         android:label="@string/title_predict"
         tools:layout="@layout/fragment_predict" >
-        <action
-            android:id="@+id/action_navigation_predict_to_profileActivity"
-            app:destination="@id/profileActivity" />
         <action
             android:id="@+id/action_navigation_predict_to_predictResultFragment"
             app:destination="@id/predictResultFragment" />

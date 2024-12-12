@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
 
-    private const val BASE_URL = "http://34.50.67.91:9000/"
+    private const val BASE_URL = "http://35.219.41.176:9000/"
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
