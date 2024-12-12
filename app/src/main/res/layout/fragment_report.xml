@@ -6,77 +6,175 @@
     android:layout_height="match_parent"
     tools:context=".ui.report.ReportFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_input2"
-        android:layout_width="350dp"
-        android:layout_height="72dp"
-        android:layout_marginHorizontal="32dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/dataCollection"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/dongker"
-        app:cornerRadius="20dp"
-        app:rippleColor="@color/purple_200"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="270dp" />
-
-    <TextView
-        android:id="@+id/tvtitle"
-        android:layout_width="411dp"
-        android:layout_height="111dp"
-        android:fontFamily="@font/poppins_medium"
-        android:gravity="center"
-        android:text="@string/AquaculturePerformanceReport"
-        android:textColor="@color/black"
-        android:textSize="38sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="78dp" />
-
-    <TextView
-        android:id="@+id/tvsubtitle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/header_container"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_reguler"
-        android:gravity="center"
-        android:text="@string/please_input_your_performance"
-        android:textColor="@color/gray"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="193dp" />
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/AquaculturePerformanceReport"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvsubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_reguler"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/please_input_your_performance"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        app:layout_constraintVertical_bias="0.142">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_feeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/biayaPakan"
+            app:startIconDrawable="@drawable/baseline_thermostat_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_feeds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_tenagaKerja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/labor"
+            app:startIconDrawable="@drawable/baseline_water_drop_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_tenagaKerja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_biayaLain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/other_cost"
+            app:startIconDrawable="@drawable/baseline_water_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_biayalain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_jmlIkanbudidaya"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/number_of_farmed_fish"
+            app:startIconDrawable="@drawable/baseline_water_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_jmlIkanbudidaya"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_jmlIkanTerjual"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/fish_sold"
+            app:startIconDrawable="@drawable/baseline_water_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_jmlIkanTerjual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_hargaJualPerIkan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/fish_selling"
+            app:startIconDrawable="@drawable/baseline_water_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_hargaJualPerIkan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_input"
-        android:layout_width="350dp"
-        android:layout_height="72dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
         android:elevation="4dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/input"
+        android:text="@string/count"
         android:textColor="@color/white"
         app:backgroundTint="@color/dongker"
         app:cornerRadius="20dp"
-        app:rippleColor="@color/purple_200"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="29dp"
-        tools:layout_editor_absoluteY="484dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0"
+        app:rippleColor="@color/purple_200" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_input3"
-        android:layout_width="350dp"
-        android:layout_height="72dp"
-        android:layout_marginHorizontal="32dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/input"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/dongker"
-        app:cornerRadius="20dp"
-        app:rippleColor="@color/purple_200"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="378dp" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

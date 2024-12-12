@@ -60,6 +60,15 @@
     <string name="jumlahpakan">Total Feeds (kg)</string>
     <string name="predictresult">"Prediction Result "</string>
     <string name="AquaculturePerformanceReport">Aquaculture Performance Report</string>
-    <string name="please_input_your_performance">Input your Performance Report</string>
+    <string name="please_input_your_performance">Input your Performance Report in Rp</string>
     <string name="dataCollection">Data Collection</string>
+    <string name="biayaPakan">Feeds cost</string>
+    <string name="labor">Labor</string>
+    <string name="other_cost">Other Cost</string>
+    <string name="number_of_farmed_fish">Number of Farmed Fish</string>
+    <string name="fish_sold">Fish Sold</string>
+    <string name="fish_selling">Fish Selling Price</string>
+    <string name="count">Count</string>
+    <string name="previosmonthsprofit">Previous Month\'s Profit</string>
+    <string name="result_report">Result Performance Report</string>
 </resources>

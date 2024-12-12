@@ -19,6 +19,10 @@ class PredictViewModel(private val apiService: ApiService) : ViewModel() {
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
 
+    //dataset ikan n
+    private val _fishTypes = MutableLiveData<List<String>>()
+    val fishTypes: LiveData<List<String>> = _fishTypes
+
     fun getPrediction(token: String, fishSize: Float, waterCondition: String, fishType: String, feedAmount: Float) {
         viewModelScope.launch {
             try {
@@ -34,6 +38,21 @@ class PredictViewModel(private val apiService: ApiService) : ViewModel() {
             }
         }
     }
+    fun getFishTypes(token: String) {
+        viewModelScope.launch {
+            try {
+                val response = apiService.getFishTypes() // Panggil API untuk mendapatkan jenis ikan
+                if (response.message == "Daftar jenis ikan berhasil diambil") {
+                    _fishTypes.value = response.data.map { it.name } // Menyimpan nama ikan
+                } else {
+                    _errorMessage.value = "Gagal mendapatkan data ikan"
+                }
+            } catch (e: Exception) {
+                _errorMessage.value = "Error: ${e.message}"
+            }
+        }
+    }
+
     fun getToken(context: Context): String? {
         val sharedPref = context.getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
         return sharedPref.getString("auth_token", null)

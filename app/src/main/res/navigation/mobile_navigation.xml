@@ -24,22 +24,15 @@
             android:id="@+id/action_navigation_predict_to_predictResultFragment"
             app:destination="@id/predictResultFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/navigation_guide"
-        android:name="com.example.aquasmart.ui.guide.GuideFragment"
-        android:label="@string/title_guide"
-        tools:layout="@layout/fragment_guide" />
-    <fragment
-        android:id="@+id/navigation_weather"
-        android:name="com.example.aquasmart.ui.weather.WeatherFragment"
-        android:label="@string/weather"
-        tools:layout="@layout/fragment_weather" />
     <fragment
         android:id="@+id/navigation_report"
         android:name="com.example.aquasmart.ui.report.ReportFragment"
         android:label="@string/report"
-        tools:layout="@layout/fragment_report" />
+        tools:layout="@layout/fragment_report" >
+        <action
+            android:id="@+id/action_navigation_report_to_reportResultFragment"
+            app:destination="@id/reportResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/waterResultFragment"
         android:name="com.example.aquasmart.ui.water.water_result.WaterResultFragment"
@@ -59,4 +52,9 @@
         android:name="com.example.aquasmart.ui.predict.predict_result.PredictResultFragment"
         android:label="Harvest Prediction Result"
         tools:layout="@layout/fragment_predict_result" />
+    <fragment
+        android:id="@+id/reportResultFragment"
+        android:name="com.example.aquasmart.ui.report.ReportResultFragment"
+        android:label="fragment_report_result"
+        tools:layout="@layout/fragment_report_result" />
 </navigation>

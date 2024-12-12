@@ -17,7 +17,7 @@ data class RegisterResponse(
     )
 }
 
-
+//res profile
 data class ProfileResponse(
     val status: String,
     val data: ProfileData
@@ -31,6 +31,7 @@ data class ProfileData(
     val dateBirth: String,
     val profilePicture: String
 )
+
 //res pp
 
 data class UpdateProfilePictureResponse(
@@ -42,6 +43,7 @@ data class UpdateProfilePictureResponse(
 data class ProfilePictureData(
     val profilePicture: String
 )
+
 
 //res fit 1
 data class ModelPredictWaterResponse(
@@ -78,4 +80,15 @@ data class PredictionData(
     val predicted_days_to_harvest: String,
     val recommended_feed: String
 )
+
+//dataset ikan
+data class FishTypesResponse(
+    val message: String,
+    val data: List<FishType>
+)
+
+data class FishType(
+    val name: String
+)
+
 

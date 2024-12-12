@@ -5,38 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.aquasmart.R
 import com.example.aquasmart.databinding.FragmentReportBinding
 
 class ReportFragment : Fragment() {
 
-    private var _binding: FragmentReportBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentReportBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val reportViewModel =
-            ViewModelProvider(this).get(ReportViewModel::class.java)
+    ): View? {
+        binding = FragmentReportBinding.inflate(inflater, container, false)
+        binding.btnInput.setOnClickListener {
+            val biayaPakan = binding.etFeeds.text.toString().toDoubleOrNull() ?: 0.0
+            val biayaTenagaKerja = binding.etTenagaKerja.text.toString().toDoubleOrNull() ?: 0.0
+            val biayaLainnya = binding.etBiayalain.text.toString().toDoubleOrNull() ?: 0.0
+            val jumlahIkanDibudidayakan = binding.etJmlIkanbudidaya.text.toString().toIntOrNull() ?: 0
+            val jumlahIkanTerjual = binding.etJmlIkanTerjual.text.toString().toIntOrNull() ?: 0
+            val hargaJualPerIkan = binding.etHargaJualPerIkan.text.toString().toDoubleOrNull() ?: 0.0
 
-        _binding = FragmentReportBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+            // Calculate total
+            val totalBiayaOperasional = biayaPakan + biayaTenagaKerja + biayaLainnya
+            val totalPendapatan = hargaJualPerIkan * jumlahIkanTerjual
+            val keuntungan = totalPendapatan - totalBiayaOperasional
 
-
-        reportViewModel.text.observe(viewLifecycleOwner) {
+            val reportData = Bundle().apply {
+                putDouble("biayaPakan", biayaPakan)
+                putDouble("biayaTenagaKerja", biayaTenagaKerja)
+                putDouble("biayaLainnya", biayaLainnya)
+                putDouble("totalBiayaOperasional", totalBiayaOperasional)
+                putInt("jumlahIkanDibudidayakan", jumlahIkanDibudidayakan)
+                putInt("jumlahIkanTerjual", jumlahIkanTerjual)
+                putDouble("hargaJualPerIkan", hargaJualPerIkan)
+                putDouble("totalPendapatan", totalPendapatan)
+                putDouble("keuntungan", keuntungan)
+            }
+            findNavController().navigate(R.id.action_navigation_report_to_reportResultFragment, reportData)
         }
-        return root
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        return binding.root
     }
 }

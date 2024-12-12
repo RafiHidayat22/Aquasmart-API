@@ -1,7 +1,6 @@
 package com.example.aquasmart.ui.auth.profile
 
 import android.app.Application
-import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -58,17 +57,4 @@ class ProfileViewModel(application: Application, private val apiService: ApiServ
             }
         }
     }
-
-    private fun getFileFromUri(uri: Uri): File? {
-        val cursor = getApplication<Application>().contentResolver.query(uri, null, null, null, null)
-        cursor?.let {
-            if (it.moveToFirst()) {
-                val columnIndex = it.getColumnIndex("_data")
-                val filePath = it.getString(columnIndex)
-                return File(filePath)
-            }
-        }
-        return null
-    }
-
 }

@@ -41,55 +41,64 @@ class WaterFragment : Fragment() {
         return binding.root
     }
 
-
     private fun sendWaterDataToApi(ph: Float, turbidity: Float, temperature: Float) {
         lifecycleScope.launch {
+            binding.progressBar.visibility = View.VISIBLE
             try {
-                // Ambil token dari SharedPreferences
-                val sharedPref = requireContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+                val sharedPref =
+                    requireContext().getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
                 val token = sharedPref.getString("auth_token", null)
 
                 if (token != null) {
-                    // Jika token ada, tambahkan header Authorization
                     Log.d("WaterDataRequest", "Token: Bearer $token")
-                    Log.d("WaterDataRequest", "ph: $ph, turbidity: $turbidity, temperature: $temperature")
-
-                    // Buat objek WaterData
-                    val waterData = WaterData(ph, turbidity, temperature)
-
-                    // Lakukan request API dengan mengirimkan data dalam format body
-                    val response = ApiConfig.apiService.waterPredict(
-                        "Bearer $token", // Menggunakan token dengan prefix "Bearer"
-                        waterData // Kirim data dalam bentuk objek
+                    Log.d(
+                        "WaterDataRequest",
+                        "ph: $ph, turbidity: $turbidity, temperature: $temperature"
                     )
 
-                    // Log response dari server
+                    val waterData = WaterData(ph, turbidity, temperature)
+
+                    val response = ApiConfig.apiService.waterPredict(
+                        "Bearer $token",
+                        waterData
+                    )
+
                     Log.d("WaterDataResponse", "Response: ${response.message}")
                     Log.d("WaterDataResponse", "Prediction: ${response.prediction}")
                     Log.d("WaterDataResponse", "Recommendation: ${response.recommendation}")
 
-                    // Cek apakah ada error
                     if (response.error != null) {
                         Log.e("WaterDataResponse", "Error: ${response.error.error}")
-                        Toast.makeText(context, "Error: ${response.error.error}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Error: ${response.error.error}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
-                        // Menampilkan hasil prediksi dan rekomendasi
                         val bundle = Bundle().apply {
-                            putString("prediction", response.prediction)   // Mengirim prediction
-                            putString("recommendation", response.recommendation) // Mengirim recommendation
+                            putString("prediction", response.prediction)
+                            putString("recommendation", response.recommendation)
                         }
-                        findNavController().navigate(R.id.action_navigation_water_to_waterResultFragment, bundle)
+                        findNavController().navigate(
+                            R.id.action_navigation_water_to_waterResultFragment,
+                            bundle
+                        )
                     }
                 } else {
-                    Toast.makeText(context, "Token tidak ditemukan, silakan login kembali", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Token tidak ditemukan, silakan login kembali",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
             } catch (e: Exception) {
                 Log.e("WaterDataRequest", "Terjadi kesalahan: ${e.message}")
-                Toast.makeText(context, "Terjadi kesalahan: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Terjadi kesalahan: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
+            } finally {
+                binding.progressBar.visibility = View.GONE
             }
         }
     }
-
 
 }

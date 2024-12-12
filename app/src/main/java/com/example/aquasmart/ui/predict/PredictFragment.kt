@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -30,15 +31,46 @@ class PredictFragment : Fragment() {
         val viewModelFactory = PredictViewModelFactory(apiService)
         viewModel = ViewModelProvider(this, viewModelFactory).get(PredictViewModel::class.java)
 
-       //input
+        val waterConditions = listOf("Buruk", "Sedang", "Baik")
+        val waterConditionAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.dropdown_item,
+            waterConditions
+        )
+        binding.etWatercondition.setAdapter(waterConditionAdapter)
+
+        binding.etWatercondition.setOnClickListener {
+            binding.etWatercondition.showDropDown()
+        }
+
+        // melihat jenis ikan
+        val token = viewModel.getToken(requireContext())
+        if (!token.isNullOrEmpty()) {
+            viewModel.getFishTypes(token)
+        } else {
+            Toast.makeText(requireContext(), "Token tidak valid, silakan login ulang", Toast.LENGTH_SHORT).show()
+        }
+
+        // Observasi perubahan
+        viewModel.fishTypes.observe(viewLifecycleOwner) { fishTypes ->
+            val fishTypesAdapter = ArrayAdapter(
+                requireContext(),
+                R.layout.dropdown_item,
+                fishTypes
+            )
+            binding.etJenisikan.setAdapter(fishTypesAdapter)
+        }
+
+        binding.etJenisikan.setOnClickListener {
+            binding.etJenisikan.showDropDown()
+        }
+
+        // Input form handling
         binding.btnInput.setOnClickListener {
             val fishSize = binding.etFishdata.text.toString().toFloatOrNull() ?: 0f
             val waterCondition = binding.etWatercondition.text.toString()
             val fishType = binding.etJenisikan.text.toString()
             val feedAmount = binding.etJmlpakan.text.toString().toFloatOrNull() ?: 0f
-
-            //ambil token
-            val token = viewModel.getToken(requireContext())
 
             if (token.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Token tidak valid, silakan login ulang", Toast.LENGTH_SHORT).show()
@@ -46,7 +78,6 @@ class PredictFragment : Fragment() {
             }
 
             binding.progressBar.visibility = View.VISIBLE
-
             viewModel.getPrediction(token, fishSize, waterCondition, fishType, feedAmount)
 
             viewModel.predictionResponse.observe(viewLifecycleOwner) { response ->
@@ -61,6 +92,7 @@ class PredictFragment : Fragment() {
                     Toast.makeText(requireContext(), "Terjadi kesalahan dalam prediksi", Toast.LENGTH_SHORT).show()
                 }
             }
+
             viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
                 if (errorMessage.isNotEmpty()) {
                     binding.progressBar.visibility = View.GONE
@@ -68,7 +100,6 @@ class PredictFragment : Fragment() {
                 }
             }
         }
-
 
         return binding.root
     }

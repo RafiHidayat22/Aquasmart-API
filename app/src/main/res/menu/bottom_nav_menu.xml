@@ -10,15 +10,6 @@
         android:id="@+id/navigation_predict"
         android:icon="@drawable/predict"
         android:title="@string/title_predict" />
-
-    <item
-        android:id="@+id/navigation_guide"
-        android:icon="@drawable/guide"
-        android:title="@string/title_guide" />
-    <item
-        android:id="@+id/navigation_weather"
-        android:icon="@drawable/weather"
-        android:title="@string/weather"/>
     <item
         android:id="@+id/navigation_report"
         android:icon="@drawable/report"

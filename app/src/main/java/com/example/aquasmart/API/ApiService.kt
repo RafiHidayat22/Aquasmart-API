@@ -56,4 +56,8 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body PredictionRequest: PredictionRequest
     ): PredictionResponse
+
+    @GET("api/fish-types")
+    suspend fun getFishTypes(): FishTypesResponse
+
 }
